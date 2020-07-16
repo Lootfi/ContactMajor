@@ -1,0 +1,35 @@
+.landing-header {
+    font-size: 60px;
+    text-transform: uppercase;
+}
+
+.labels {
+    background-color: rgb(202, 202, 202);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1px 0px;
+    grid-template-areas: ". . ." ". . .";
+    justify-items: center;
+    align-items: center;
+}
+.labels > img {
+    width: 40%;
+}
+
+@media only screen and (max-width: 500px) {
+    .labels {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .labels > img {
+        width: 40%;
+        padding: 20px 0;
+        border-bottom: 1px solid rgb(32, 32, 32);
+    }
+}

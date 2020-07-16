@@ -1,0 +1,54 @@
+#cm-logo {
+    width: 50px;
+}
+
+/* 
+    Modal
+*/
+
+/* #paymentModal {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    padding-top: 100px;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    background-color: black;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content {
+    margin: auto;
+    width: 70%;
+    max-width: 1200px;
+    background-color: white;
+    color: black;
+}
+
+.close {
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #999;
+    text-decoration: none;
+    cursor: pointer;
+} */
