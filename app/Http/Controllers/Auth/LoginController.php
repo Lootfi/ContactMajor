@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -44,5 +45,22 @@ class LoginController extends Controller
         Auth::logout();
 
         return redirect('/');
+    }
+
+    public function apilogin(Request $request)
+    {
+        $credentials = $request->only($this->username(), 'password');
+        $authSuccess = Auth::attempt($credentials, $request->has('remember'));
+
+        if ($authSuccess) {
+            $request->session()->regenerate();
+            return response()->json(['success' => true]);
+        }
+
+        return
+            response()->json([
+                'success' => false,
+                'message' => 'Auth failed (or some other message)'
+            ]);
     }
 }

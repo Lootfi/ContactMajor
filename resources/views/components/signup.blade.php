@@ -1,208 +1,155 @@
 <div class="modal" tabindex="-1" role="dialog" id="registerModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-
- {{-- TAB 01 --}}
- <form id="regForm" method="POST" class="tab">
-    @csrf
-    <div class="modal-header">
-        <h5 class="modal-title">Getting Started</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-
-        <div class="form-group">
-            <label for="name">{{ __('Nom') }}</label>
-
-            <div>
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                    name="name" value="{{ old('name') }}" required autocomplete="name"
-                    autofocus>
-                <span class="validation-error" role="alert" id="name-error"></span>
+            <div class="modal-header">
+                <h5 class="modal-title">Getting Started</h5>
+                <button id="closeRegModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="email" class="text-md-right">{{ __('E-Mail') }}</label>
+            <div class="container">
+                <div class="panel panel-primary setup-content" id="step-1">
+                    <x-social-signup />
+                    <div class="text-muted text-center my-3">
+                        <span>or</span>
+                    </div>
+                    <form id="regForm" method="POST">
+                        @csrf
 
-            <div>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                    name="email" value="{{ old('email') }}" required autocomplete="email">
+                        <div class="modal-body">
 
-                <span class="validation-error" role="alert" id="email-error"></span>
-            </div>
-        </div>
+                            <div class="form-group">
+                                <label for="name">{{ __('Nom') }}</label>
 
-        <div class="form-group">
-            <label for="password"
-                class="text-md-right">{{ __('Mot de passe') }}</label>
-
-            <div>
-                <input id="password" type="password"
-                    class="form-control @error('password') is-invalid @enderror" name="password" required
-                    autocomplete="new-password">
-
-                <span class="validation-error" role="alert" id="password-error">
-                </span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="password-confirm"
-                class="col-md-4text-md-right">{{ __('Confirmation Mot de passe') }}</label>
-
-            <div>
-                <input id="password-confirm" type="password" class="form-control"
-                    name="password_confirmation" required autocomplete="new-password">
-            </div>
-        </div>
-
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Fermer</button>
-        <button type="submit" id="register-submit" class="btn btn-primary btn-lg">Continue</button>
-    </div>
-</form>
-
-{{-- END TAB 01 --}}
-
-
-            
-            {{-- TAB 02 --}}
-
-            <div class="tab">
-                <div class="modal-header">
-                    <h5 class="modal-title">Subscription</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="bg-dark text-white container">
-                    <h1 style="font-size: 1.5em">Payer xx maintenent.</h1>
-                    <hr>
-                </div>
-                <div class="modal-body">
-
-
-
-                    <article class="card">
-                        <div class="card-body p-5">
-
-                            <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="pill" href="#stripe">
-                                        <i class="fab fa-cc-stripe"></i>  Stripe</a></li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" href="#paypal">
-                                        <i class="fab fa-paypal"></i>  Paypal</a>
-                                </li>
-                            </ul>
-
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="stripe">
-
-                                    <div style="padding-top: 20px">
-
-                                        <div class="input-group">
-                                            <input type="text" placeholder="Votre nom dans la carte" class="form-control form-control-lg" id="card-holder-name" type="text">
-                                        </div>
-                                        <div style="margin: 20px 0"></div>
-
-                                            <div id="stripe-card-element"></div>
-                                            <span class="validation-error" role="alert" id="stripe-error"></span>
-                                    </div>
-
-
-
-                                    {{-- <div class="form-group">
-                                        <label for="cardNumber">Card number</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="cardNumber" placeholder="">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text text-muted">
-                                                    <i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>  
-                                                    <i class="fab fa-cc-mastercard"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                    {{-- <div class="form-group">
-                                        <label for="card-holder-name"></label>
-                                        <input id="card-holder-name" type="text">
-                                    </div> --}}
-
-
-                                    {{-- <div class="row">
-                                        <div class="col-sm-8">
-                                            <div class="form-group">
-                                                <label><span class="hidden-xs">Expiration</span> </label>
-                                                <div class="input-group">
-                                                    <input type="number" class="form-control" placeholder="MM" name="">
-                                                    <input type="number" class="form-control" placeholder="YY" name="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label data-toggle="tooltip" title=""
-                                                    data-original-title="3 digits code on back side of the card">CVV <i
-                                                        class="fa fa-question-circle"></i></label>
-                                                <input type="number" class="form-control" required="">
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                </div>
-                                <div class="tab-pane fade" id="paypal">
-                                    <p>Paypal is easiest way to pay online</p>
-                                    <p>
-                                        <button type="button" class="btn btn-primary"> <i class="fab fa-paypal"></i> Log
-                                            in my Paypal </button>
-                                    </p>
-                                    <p><strong>Note:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. </p>
-                                </div>
-                                <div class="tab-pane fade" id="nav-tab-bank">
-                                    <p>Bank accaunt details</p>
-                                    <dl class="param">
-                                        <dt>BANK: </dt>
-                                        <dd> THE WORLD BANK</dd>
-                                    </dl>
-                                    <dl class="param">
-                                        <dt>Accaunt number: </dt>
-                                        <dd> 12345678912345</dd>
-                                    </dl>
-                                    <dl class="param">
-                                        <dt>IBAN: </dt>
-                                        <dd> 123456789</dd>
-                                    </dl>
-                                    <p><strong>Note:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. </p>
+                                <div class="input-group input-group-lg">
+                                    <input id="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror" name="name" required
+                                        autocomplete="name" value="lotfi" autofocus>
+                                    <span class="invalid-feedback" role="alert" id="nameError">
+                                        <strong></strong>
+                                    </span>
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="email" class="text-md-right">{{ __('E-Mail') }}</label>
+
+                                <div class="input-group input-group-lg">
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email" required
+                                        autocomplete="email" value="abdallahlotfi97@gmail.com">
+
+                                    <span class="invalid-feedback" role="alert" id="emailError">
+                                        <strong></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-md-right">{{ __('Mot de passe') }}</label>
+
+                                <div class="input-group input-group-lg">
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        required autocomplete="new-password" value="123456789">
+
+                                    <span class="invalid-feedback" role="alert" id="passwordError">
+                                        <strong></strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password-confirm"
+                                    class="text-md-right">{{ __('Confirmation Mot de passe') }}</label>
+
+                                <div class="input-group input-group-lg">
+                                    <input id="password-confirm" type="password" class="form-control"
+                                        name="password_confirmation" required autocomplete="new-password"
+                                        value="123456789">
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-block btn-lg btn-danger" id="email-button">Continuer
+                                avec
+                                email</button>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-primary setup-content" id="step-2">
+                <div class="card-body p-5">
+
+                    <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href="#stripe">
+                                <i class="fab fa-cc-stripe"></i> Stripe</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#paypal">
+                                <i class="fab fa-paypal"></i> Paypal</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="stripe">
+
+                            <div style="padding-top: 20px">
+                                <div style="margin: 15px 0"></div>
+                                <label for="card-element" class="block text-gray-700 text-sm font-bold mb-2">
+                                    Credit Card Info
+                                </label>
+                                <div id="stripe-card-element"></div>
+                                <span class="validation-error" role="alert" id="stripe-error"></span>
+                            </div>
+                            <div class="modal-footer">
+                                {{-- <button type="button" class="btn btn-secondary btn-lg"
+                                            data-dismiss="modal">Fermer</button>
+                                        <button type="submit" id="card-button"
+                                            class="btn btn-primary btn-lg">Continuer</button> --}}
+                                <button class="btn btn-block btn-lg btn-danger" id="card-button"
+                                    type="submit">Continuer</button>
+                            </div>
                         </div>
-                    </article>
+                        <div class="tab-pane fade" id="paypal">
+                            <div style="padding-top: 20px">
+                                <div id="paypal-button-container"></div>
+                            </div>
+                            <div class="modal-footer">
+                                {{-- <button type="button" class="btn btn-secondary btn-lg"
+                                            data-dismiss="modal">Fermer</button>
+                                        <button type="button" onclick="payWithPayPal()" id="paypal-button"
+                                            class="btn btn-primary btn-lg">Continuer avec PayPal</button> --}}
+                                <button type="button" onclick="payWithPayPal()" class="btn btn-block btn-lg btn-danger"
+                                    id="paypal-button">Continuer</button>
+                            </div>
+                        </div>
+                    </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="card-button" class="btn btn-primary btn-lg">Commencer l'Abonnement</button>
                 </div>
             </div>
 
-            {{-- END TAB 02 --}}
-
-           
-            
-
-
-            <div style="text-align:center;margin-top:40px;">
-                <span class="step"></span>
-                <span class="step"></span>
-            </div>
         </div>
+        {{-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Fermer</button>
+                    <button type="submit" id="card-button" class="btn btn-primary btn-lg">Continue</button>
+                </div> --}}
+        {{-- END TAB 01 --}}
+
     </div>
 </div>
+</div>
+
+@push('scripts')
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    // This function displays Stripe payment
+        const stripe = Stripe('{{ env("STRIPE_KEY") }}');
+        const elements = stripe.elements();
+        const cardElement = elements.create("card");
+
+        cardElement.mount("#stripe-card-element");
+
+</script>
+<script src="{{asset('js/stripePayment.js')}}"></script>
+<script src="{{asset('js/signupSteps.js')}}"></script>
+
+@endpush

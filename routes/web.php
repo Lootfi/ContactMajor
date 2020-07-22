@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 
 /*
@@ -20,4 +21,15 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeAuthController@index');
+// Route::post('login', 'Auth\LoginController@login')->name('login');
+// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+// Route::post('register', 'Auth\RegisterController@register')->name('register');
+
+Route::get('/home', 'HomeAuthController@index')->name('welcome');
+
+Route::post('/social/facebook/signup', 'Auth\FacebookController@register')->name('facebook-signup');
+Route::post('/social/google/signup', 'Auth\GoogleController@register')->name('google-signup');
+
+Route::get('facebook', function (Request $request) {
+    return Socialite::driver('facebook')->redirect('home');
+});

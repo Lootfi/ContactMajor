@@ -1,8 +1,8 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,6 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('register', 'Auth\RegisterController@register')->name('register');
-Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::post('register', 'Auth\RegisterController@register');
 Route::post('payment-success', 'Stripe\PaymentController@success')->name('success');
+Route::post('amount', function (Request $request) {
+    return response()->json('100');
+});
+
+Route::post('payment-confirmed', function (Request $request) {
+    $user = User::where('email', $request->email)->first();
+
+    $user->payment_confirmed = true;
+    $user->save();
+});
+
+Route::get('config', function (Request $request) {
+    dd(config('hybridauth.providers.Google'));
+});

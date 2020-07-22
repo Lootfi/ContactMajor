@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -27,10 +27,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-    <link rel="stylesheet" media="screen"
-        href="{{ asset('css/homepage-guest-a64009b0469f4b10acc3.css') }}" />
-    <link rel="stylesheet" media="screen"
-        href="{{ asset('css/navigation-logged-out-d62e82ca93adb946e71d.css') }}" />
+    <link rel="stylesheet" media="screen" href="{{ asset('css/homepage-guest-a64009b0469f4b10acc3.css') }}" />
+    <link rel="stylesheet" media="screen" href="{{ asset('css/navigation-logged-out-d62e82ca93adb946e71d.css') }}" />
     <link rel="stylesheet" media="screen"
         href="{{ asset('css/rebrand_color-9798a1049b0d1bdaed8ea422a78f405f28d0b020ba0d492cd154abda574182e4.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
@@ -38,22 +36,17 @@
     <link rel="stylesheet" href="{{ asset('css/modal.css') }}">
     @show
 
-    <script src="{{ asset('js/home.js') }}"></script>
     <script src="../../js/register.js"></script>
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" name="viewport" />
 
-    {{-- STRIPE --}}
-
-    <script src="https://js.stripe.com/v3/"></script>
-
-    {{-- // STRIPE // --}}
 
 </head>
 
 
 
 <body class="navbar-v2 mc-page" id="">
+    <script src="{{ asset('js/home.js') }}"></script>
 
 
     <div style="
@@ -71,12 +64,12 @@
     <div class="hide-when-cart-active">
 
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-            <a href="/" class="navbar-brand logo"><img src="{{ asset('logo.png') }}" id="cm-logo"
-                    alt="cm-logo" />
+            <a href="/" class="navbar-brand logo"><img src="{{ asset('logo.png') }}" id="cm-logo" alt="cm-logo" />
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-              </button>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
@@ -85,26 +78,25 @@
                     </li>
                 </ul>
                 @if(Auth::guest())
-                    <div class="my-2 my-lg-0">
-                        <span id="loginButton" class="font-weight-bold mc-text-small mc-text--uppercase mc-mr-1 mc-ml-5"
-                            style="cursor: pointer;" data-toggle="modal" data-target="#loginModal">LOGIN</span>
-                    </div>
+                <div class="my-2 my-lg-0">
+                    <span id="loginButton" class="font-weight-bold mc-text-small mc-text--uppercase mc-mr-1 mc-ml-5"
+                        style="cursor: pointer;" data-toggle="modal" data-target="#loginModal">LOGIN</span>
+                </div>
                 @else
-                    <div class="">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Bonjour, {{ Auth::user()->name }}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">Mon Compte</a>
-                                <a class="dropdown-item" href="#">Gérer Mon Abonnement</a>
-                                <form class="dropdown-item form-inline" method="POST"
-                                    action="{{ route('logout') }}">@csrf<button
-                                        type="submit">Logout</button></form>
-                            </div>
+                <div class="">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Bonjour, {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#">Mon Compte</a>
+                            <a class="dropdown-item" href="#">Gérer Mon Abonnement</a>
+                            <form class="dropdown-item form-inline" method="POST" action="{{ route('logout') }}">
+                                @csrf<button type="submit">Logout</button></form>
                         </div>
                     </div>
+                </div>
                 @endif
 
 

@@ -48,3 +48,26 @@
     text-decoration: none;
     cursor: pointer;
 } */
+
+.facebook-signup form button {
+    background-color: #3b5998;
+}
+
+.google-signup form button {
+    background-color: #4a71c5;
+}
+
+.social-signup form {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.social-signup form button {
+    width: 17em;
+    text-align: center;
+}
+
+.social-signup form button span {
+    align-self: flex-end;
+}

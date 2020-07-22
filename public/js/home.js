@@ -1,46 +1,37 @@
-var currentTab = 0; // Current tab is set to be the first tab (0)
-
-function openPaymentModal() {
-    showTab(currentTab); // Display the current tab
-}
-
-function showTab(n) {
-    // This function will display the specified tab of the form ...
-    var x = document.getElementsByClassName("tab");
-    x[n].style.display = "block";
-    // ... and fix the Previous/Next buttons:
-    // if (n == 0) {
-    //     document.getElementById("prevBtn").style.display = "none";
-    // } else {
-    //     document.getElementById("prevBtn").style.display = "inline";
-    // }
-    // if (n == x.length - 1) {
-    //     document.getElementById("nextBtn").innerHTML = "Submit";
-    // } else {
-    //     document.getElementById("nextBtn").innerHTML = "Next";
-    // }
-    // ... and run a function that displays the correct step indicator:
-    fixStepIndicator(n);
-}
-
-function nextPrev(n) {
-    // This function will figure out which tab to display
-    var x = document.getElementsByClassName("tab");
-    // Hide the current tab:
-    x[currentTab].style.display = "none";
-    // Increase or decrease the current tab by 1:
-    currentTab = currentTab + n;
-
-    showTab(currentTab);
-}
-
-function fixStepIndicator(n) {
-    // This function removes the "active" class of all steps...
-    var i,
-        x = document.getElementsByClassName("step");
-    for (i = 0; i < x.length; i++) {
-        x[i].className = x[i].className.replace(" active", "");
+// $(document).ready(function() {
+//     $.ajaxSetup({ cache: true });
+//     $.getScript("https://connect.facebook.net/en_US/sdk.js", function() {
+//         FB.init({
+//             appId: "{1772585316217652}",
+//             version: "v2.7" // or v2.1, v2.2, v2.3, ...
+//         });
+//         $("#loginbutton,#feedbutton").removeAttr("disabled");
+//         FB.getLoginStatus(res => console.log("RES", res));
+//     });
+// });
+(function(d, s, id) {
+    var js,
+        fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {
+        return;
     }
-    //... and adds the "active" class to the current step:
-    x[n].className += " active";
-}
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+})(document, "script", "facebook-jssdk");
+
+// window.fbAsyncInit = function() {
+//     FB.init({
+//         appId: "{your-app-id}",
+//         cookie: true,
+//         xfbml: true,
+//         version: "{api-version}"
+//     });
+
+//     FB.AppEvents.logPageView();
+// };
+
+FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});

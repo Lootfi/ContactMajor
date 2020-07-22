@@ -14,10 +14,11 @@
 
                         <div class="form-group">
                             <label for="email"
-                                class="text-md-right">{{ __('Address E-Mail') }}</label>
+                                class="text-md-right">{{ __('Address E-Mail') }}
+                            </label>
 
                             <div>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                <input id="loginemail" type="email" class="form-control @error('email') is-invalid @enderror"
                                     name="email" value="{{ old('email') }}" required
                                     autocomplete="email" autofocus>
 
@@ -34,7 +35,7 @@
                                 class="text-md-right">{{ __('Mot de passe') }}</label>
 
                             <div>
-                                <input id="password" type="password"
+                                <input id="loginpassword" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
                                     required autocomplete="current-password">
 
@@ -90,3 +91,11 @@
 </div>
 
 </div>
+
+@push('scripts')
+@if($errors->has('email') || $errors->has('password'))
+<script>
+document.getElementById("loginButton").click()
+</script>
+@endif
+@endpush

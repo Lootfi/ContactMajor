@@ -13,34 +13,34 @@ function showValidationErrors(errors) {
     }
 }
 
-$("#regForm").submit(function(event) {
-    event.preventDefault();
-    let array = $(this).serializeArray();
-    let data = {};
-    array.map(field => {
-        data[field.name] = field.value;
-    });
-    axios
-        .post("/api/register", data)
-        .then(res => {
-            clearValidationErrors();
-            if (res.data.hasOwnProperty("errors"))
-                showValidationErrors(res.data.errors);
-            else {
-                //show next tab, entering card info
-                console.log("registered");
-                // let cardButton = document.getElementById("card-button");
-                // cardButton.setAttribute(
-                //     "data-secret",
-                //     res.data.intent.client_secret
-                // );
-                // nextPrev(1);
+// $("#regForm").submit(function(event) {
+//     event.preventDefault();
+//     let array = $(this).serializeArray();
+//     let data = {};
+//     array.map(field => {
+//         data[field.name] = field.value;
+//     });
+//     axios
+//         .post("/api/register", data)
+//         .then(res => {
+//             clearValidationErrors();
+//             if (res.data.hasOwnProperty("errors"))
+//                 showValidationErrors(res.data.errors);
+//             else {
+//                 //show next tab, entering card info
+//                 console.log("registered");
+//                 // let cardButton = document.getElementById("card-button");
+//                 // cardButton.setAttribute(
+//                 //     "data-secret",
+//                 //     res.data.intent.client_secret
+//                 // );
+//                 // nextPrev(1);
 
-                document.getElementsByClassName("close")[0].click();
-                document.getElementById("loginButton").click();
-                document.getElementsByClassName("message")[0].innerText =
-                    "Inscription réussie, connectez-vous à votre compte.";
-            }
-        })
-        .catch(err => console.log(err));
-});
+//                 document.getElementsByClassName("close")[0].click();
+//                 document.getElementById("loginButton").click();
+//                 document.getElementsByClassName("message")[0].innerText =
+//                     "Inscription réussie, connectez-vous à votre compte.";
+//             }
+//         })
+//         .catch(err => console.log(err));
+// });
