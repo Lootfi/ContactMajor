@@ -233,6 +233,7 @@ return [
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
         'Google' => Hybridauth\Provider\Google::class,
         'Facebook' => Hybridauth\Provider\Facebook::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

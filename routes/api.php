@@ -3,6 +3,8 @@
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,4 +34,8 @@ Route::post('payment-confirmed', function (Request $request) {
 
 Route::get('config', function (Request $request) {
     dd(config('hybridauth.providers.Google'));
+});
+
+Route::get('social/login', function (Request $request) {
+    return response()->json(Socialite::with('facebook')->userFromToken('' . $request->code));
 });

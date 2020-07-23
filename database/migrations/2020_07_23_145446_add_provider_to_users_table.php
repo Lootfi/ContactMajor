@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomerColumns extends Migration
+class AddProviderToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ class CreateCustomerColumns extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('payment_method')->nullable();
-            $table->boolean('payment_confirmed')->default(false);
+            $table->string('provider');
+            $table->string('provider_id');
+            $table->text('avatar');
         });
     }
 
@@ -27,10 +28,9 @@ class CreateCustomerColumns extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn([
-                'payment_method',
-                'payment_confirmed',
-            ]);
+            $table->dropColumn('provider');
+            $table->dropColumn('provider_id');
+            $table->dropColumn('avatar');
         });
     }
 }

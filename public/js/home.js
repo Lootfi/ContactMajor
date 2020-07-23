@@ -9,29 +9,19 @@
 //         FB.getLoginStatus(res => console.log("RES", res));
 //     });
 // });
-(function(d, s, id) {
-    var js,
-        fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {
-        return;
-    }
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-})(document, "script", "facebook-jssdk");
 
-// window.fbAsyncInit = function() {
-//     FB.init({
-//         appId: "{your-app-id}",
-//         cookie: true,
-//         xfbml: true,
-//         version: "{api-version}"
-//     });
+let search = new URLSearchParams(window.location.search);
 
-//     FB.AppEvents.logPageView();
-// };
+if (search.has("code") && search.has("state")) {
+    socialLogin();
+}
 
-FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-});
+function socialLogin() {
+    axios
+        .get("/api/social/login", {
+            code: search.get("code"),
+            state: search.get("state")
+        })
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err.response.data));
+}

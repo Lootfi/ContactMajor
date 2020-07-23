@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -33,6 +34,31 @@ Route::get('/home', 'HomeAuthController@index')->name('welcome');
 Route::get('facebook', function (Request $request) {
     return Socialite::driver('facebook')->redirect('home');
 })->name('facebook-signup');
+
+Route::get('callback', function (Request $request) {
+    $socialUser = Socialite::driver('facebook')->user();
+    $user = User::where('provider_id', '=', $socialUser->id)
+        ->where('provider', '=', 'facebook')
+        ->first();
+
+    if ($user == null) {
+        $newUser = new User();
+
+        $newUser->name        = $socialUser->getName();
+        $newUser->email       = $socialUser->getEmail() == '' ? '' : $socialUser->getEmail();
+        $newUser->password    = '';
+        $newUser->provider    = 'facebook';
+        $newUser->provider_id = $socialUser->getId();
+
+        $newUser->save();
+
+        $user = $newUser;
+    }
+
+    Auth::login($user);
+
+    return redirect('/');
+});
 
 Route::get('google', function (Request $request) {
     return Socialite::driver('google')->redirect('home');
