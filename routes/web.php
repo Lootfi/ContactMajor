@@ -38,6 +38,7 @@ Route::get('facebook', function (Request $request) {
 
 Route::get('callback', function (Request $request) {
     $socialUser = Socialite::driver('facebook')->user();
+
     $user = User::where('provider_id', '=', $socialUser->id)
         ->where('provider', '=', 'facebook')
         ->first();
@@ -58,7 +59,7 @@ Route::get('callback', function (Request $request) {
 
     Auth::login($user);
 
-    return redirect()->route('home');
+    return redirect('/');
 });
 
 Route::get('google', function (Request $request) {
