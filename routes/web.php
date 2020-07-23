@@ -27,9 +27,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeAuthController@index')->name('welcome');
 
-Route::post('/social/facebook/signup', 'Auth\FacebookController@register')->name('facebook-signup');
-Route::post('/social/google/signup', 'Auth\GoogleController@register')->name('google-signup');
+// Route::post('/social/facebook/signup', 'Auth\FacebookController@register')->name('facebook-signup');
+// Route::post('/social/google/signup', 'Auth\GoogleController@register')->name('google-signup');
 
 Route::get('facebook', function (Request $request) {
     return Socialite::driver('facebook')->redirect('home');
-});
+})->name('facebook-signup');
+
+Route::get('google', function (Request $request) {
+    return Socialite::driver('google')->redirect('home');
+})->name('google-signup');
