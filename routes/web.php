@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,7 @@ Route::get('/home', 'HomeAuthController@index')->name('welcome');
 // Route::post('/social/google/signup', 'Auth\GoogleController@register')->name('google-signup');
 
 Route::get('facebook', function (Request $request) {
-    return Socialite::driver('facebook')->redirect('home');
+    return Socialite::driver('facebook')->redirect();
 })->name('facebook-signup');
 
 Route::get('callback', function (Request $request) {
@@ -57,7 +58,7 @@ Route::get('callback', function (Request $request) {
 
     Auth::login($user);
 
-    return redirect('/');
+    return redirect()->route('home');
 });
 
 Route::get('google', function (Request $request) {
