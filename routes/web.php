@@ -39,24 +39,14 @@ Route::get('facebook', function (Request $request) {
 Route::get('callback', function (Request $request) {
     $socialUser = Socialite::driver('facebook')->user();
 
-    $user = User::where('provider_id', '=', $socialUser->id)
-        ->where('provider', '=', 'facebook')
-        ->first();
-
-    if ($user == null) {
-        $newUser = new User();
-
-        $newUser->name        = $socialUser->getName();
-        $newUser->email       = $socialUser->getEmail() == '' ? '' : $socialUser->getEmail();
-        $newUser->password    = '';
-        $newUser->provider    = 'facebook';
-        $newUser->provider_id = $socialUser->getId();
-
-        $newUser->save();
-
-        $user = $newUser;
-    }
-
+    $user = User::firstOrCreate([
+        'provider_id' => $socialUser->getId(),
+        'provider' => 'facebook'
+    ], [
+        'name' => $socialUser->getName(),
+        'email' => $socialUser->getEmail() == '' ? '' : $socialUser->getEmail(),
+        'password' => '',
+    ]);
     Auth::login($user);
 
     return redirect('/');
