@@ -32,26 +32,8 @@ Route::get('/home', 'HomeAuthController@index')->name('welcome');
 // Route::post('/social/facebook/signup', 'Auth\FacebookController@register')->name('facebook-signup');
 // Route::post('/social/google/signup', 'Auth\GoogleController@register')->name('google-signup');
 
-Route::get('facebook', function (Request $request) {
-    return Socialite::driver('facebook')->redirect();
-})->name('facebook-signup');
+Route::get('facebook', 'Auth\FacebookAuth@auth')->name('facebook-signup');
+Route::get('auth/facebook/callback', 'Auth\FacebookAuth@callback');
 
-Route::get('callback', function (Request $request) {
-    $socialUser = Socialite::driver('facebook')->user();
-
-    $user = User::firstOrCreate([
-        'provider_id' => $socialUser->getId(),
-        'provider' => 'facebook'
-    ], [
-        'name' => $socialUser->getName(),
-        'email' => $socialUser->getEmail() == '' ? '' : $socialUser->getEmail(),
-        'password' => '',
-    ]);
-    Auth::login($user);
-
-    return redirect('/');
-});
-
-Route::get('google', function (Request $request) {
-    return Socialite::driver('google')->redirect('home');
-})->name('google-signup');
+Route::get('google', 'Auth\GoogleAuth@auth')->name('google-signup');
+Route::get('auth/google/callback', 'Auth\GoogleAuth@callback');
