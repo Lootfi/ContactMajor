@@ -258,8 +258,8 @@
 @if(session('email'))
 <script>
     document.getElementById('hero-cta').click();
-    $("#step-2").hide();
-    $("#step-1").show();
+    document.getElementById('step-1').style.display = "none";
+    document.getElementById('step-2').style.display = "block";
 </script>
 @endif
 
