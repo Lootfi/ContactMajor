@@ -33,7 +33,7 @@ Route::get('/home', 'HomeAuthController@index')->name('welcome');
 // Route::post('/social/google/signup', 'Auth\GoogleController@register')->name('google-signup');
 
 Route::get('facebook', 'Auth\FacebookAuth@auth')->name('facebook-signup');
-Route::get('auth/facebook/callback', 'Auth\FacebookAuth@callback');
+Route::get('facebookcallback', 'Auth\FacebookAuth@callback');
 
 Route::get('google', 'Auth\GoogleAuth@auth')->name('google-signup');
-Route::get('auth/google/callback', 'Auth\GoogleAuth@callback');
+Route::get('googlecallback', 'Auth\GoogleAuth@callback');
