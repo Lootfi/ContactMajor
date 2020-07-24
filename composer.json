@@ -20,6 +20,7 @@
         "laravel/ui": "^2.1",
         "paypal/paypal-checkout-sdk": "1.0.1",
         "socialiteproviders/facebook": "^1.0",
+        "socialiteproviders/google": "^3.0",
         "srmklive/paypal": "~1.0"
     },
     "require-dev": {
