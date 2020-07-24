@@ -26,6 +26,7 @@ class GoogleAuth extends Controller
             'name' => $socialUser->getName(),
             'email' => $socialUser->getEmail() == '' ? '' : $socialUser->getEmail(),
             'password' => '',
+            'avatar' => $socialUser->getAvatar(),
         ]);
         Auth::login($user);
 

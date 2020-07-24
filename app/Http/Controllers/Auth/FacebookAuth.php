@@ -10,7 +10,6 @@ use Laravel\Socialite\Facades\Socialite;
 
 class FacebookAuth extends Controller
 {
-
     public function auth()
     {
         return Socialite::driver('facebook')->redirect();
@@ -27,6 +26,7 @@ class FacebookAuth extends Controller
             'name' => $socialUser->getName(),
             'email' => $socialUser->getEmail() == '' ? '' : $socialUser->getEmail(),
             'password' => '',
+            'avatar' => $socialUser->getAvatar(),
         ]);
         Auth::login($user);
 
