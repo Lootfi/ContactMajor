@@ -255,12 +255,15 @@
     </div>
 </div>
 
+
+@endsection
+
 @if(session('email'))
+@push('scripts')
 <script>
     document.getElementById('hero-cta').click();
     document.getElementById('step-1').style.display = "none";
     document.getElementById('step-2').style.display = "block";
 </script>
+@endpush
 @endif
-
-@endsection
