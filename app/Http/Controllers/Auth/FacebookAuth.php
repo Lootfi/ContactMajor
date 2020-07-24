@@ -28,8 +28,8 @@ class FacebookAuth extends Controller
             'password' => '',
             'avatar' => $socialUser->getAvatar(),
         ]);
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect('/');
+        return redirect('/')->with('email', $user->email);
     }
 }

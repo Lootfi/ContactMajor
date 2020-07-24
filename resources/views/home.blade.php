@@ -255,4 +255,12 @@
     </div>
 </div>
 
+@if(session('email'))
+<script>
+    document.getElementById('hero-cta').click();
+    $("#step-2").hide();
+    $("#step-1").show();
+</script>
+@endif
+
 @endsection
