@@ -10,196 +10,141 @@
 
             <div class="container">
                 <div class="panel panel-primary setup-content" id="step-1">
-                    <x-social-signup />
+                    <x-social-signup :login="false" />
                     <div class="text-muted text-center my-3">
                         <span>or</span>
                     </div>
-                    {{-- <form id="regForm" method="POST">
+                    <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
-                            <div class="form-group">
-                                <label for="name">{{ __('Nom') }}</label>
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                    name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                    <div class="input-group input-group-lg">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            name="name" required autocomplete="name" value="lotfi" autofocus>
-                        <span class="invalid-feedback" role="alert" id="nameError">
-                            <strong></strong>
-                        </span>
-                    </div>
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email"
+                                class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    required autocomplete="new-password">
+
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control"
+                                    name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
-
-                <div class="form-group">
-                    <label for="email" class="text-md-right">{{ __('E-Mail') }}</label>
-
-                    <div class="input-group input-group-lg">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                            name="email" required autocomplete="email" value="abdallahlotfi97@gmail.com">
-
-                        <span class="invalid-feedback" role="alert" id="emailError">
-                            <strong></strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="text-md-right">{{ __('Mot de passe') }}</label>
-
-                    <div class="input-group input-group-lg">
-                        <input id="password" type="password"
-                            class="form-control @error('password') is-invalid @enderror" name="password" required
-                            autocomplete="new-password" value="123456789">
-
-                        <span class="invalid-feedback" role="alert" id="passwordError">
-                            <strong></strong>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password-confirm" class="text-md-right">{{ __('Confirmation Mot de passe') }}</label>
-
-                    <div class="input-group input-group-lg">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                            required autocomplete="new-password" value="123456789">
-                    </div>
-                </div>
-                <button type="button" class="btn btn-block btn-lg btn-danger" id="email-button">Continuer
-                    avec
-                    email</button>
-                </form> --}}
-
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
-
-                    <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="email"
-                            class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="password" type="password"
-                                class="form-control @error('password') is-invalid @enderror" name="password" required
-                                autocomplete="new-password">
-
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="password-confirm"
-                            class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="password-confirm" type="password" class="form-control"
-                                name="password_confirmation" required autocomplete="new-password">
-                        </div>
-                    </div>
-
-                    <div class="form-group row mb-0">
-                        <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
-                                {{ __('Register') }}
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
             </div>
-        </div>
-        <div class="panel panel-primary setup-content" id="step-2">
-            <div class="card-body p-5">
+            <div class="panel panel-primary setup-content" id="step-2">
+                <div class="card-body p-5">
 
-                <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="pill" href="#stripe">
-                            <i class="fab fa-cc-stripe"></i> Stripe</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#paypal">
-                            <i class="fab fa-paypal"></i> Paypal</a>
-                    </li>
-                </ul>
+                    <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href="#stripe">
+                                <i class="fab fa-cc-stripe"></i> Stripe</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#paypal">
+                                <i class="fab fa-paypal"></i> Paypal</a>
+                        </li>
+                    </ul>
 
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="stripe">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="stripe">
 
-                        <div style="padding-top: 20px">
-                            <div style="margin: 15px 0"></div>
-                            <label for="card-element" class="block text-gray-700 text-sm font-bold mb-2">
-                                Credit Card Info
-                            </label>
-                            <div id="stripe-card-element"></div>
-                            <span class="validation-error" role="alert" id="stripe-error"></span>
-                        </div>
-                        <div class="modal-footer">
-                            {{-- <button type="button" class="btn btn-secondary btn-lg"
+                            <div style="padding-top: 20px">
+                                <div style="margin: 15px 0"></div>
+                                <label for="card-element" class="block text-gray-700 text-sm font-bold mb-2">
+                                    Credit Card Info
+                                </label>
+                                <div id="stripe-card-element"></div>
+                                <span class="validation-error" role="alert" id="stripe-error"></span>
+                            </div>
+                            <div class="modal-footer">
+                                {{-- <button type="button" class="btn btn-secondary btn-lg"
                                             data-dismiss="modal">Fermer</button>
                                         <button type="submit" id="card-button"
                                             class="btn btn-primary btn-lg">Continuer</button> --}}
-                            <button class="btn btn-block btn-lg btn-danger" id="card-button" type="submit"
-                                data-secret="{{ session('intent') }}">Continuer</button>
+                                <button class="btn btn-block btn-lg btn-danger" id="card-button" type="submit"
+                                    data-secret="{{ session('intent') }}">Continuer</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="paypal">
-                        <div style="padding-top: 20px">
-                            <div id="paypal-button-container"></div>
-                        </div>
-                        <div class="modal-footer">
-                            {{-- <button type="button" class="btn btn-secondary btn-lg"
+                        <div class="tab-pane fade" id="paypal">
+                            <div style="padding-top: 20px">
+                                <div id="paypal-button-container"></div>
+                            </div>
+                            <div class="modal-footer">
+                                {{-- <button type="button" class="btn btn-secondary btn-lg"
                                             data-dismiss="modal">Fermer</button>
                                         <button type="button" onclick="payWithPayPal()" id="paypal-button"
                                             class="btn btn-primary btn-lg">Continuer avec PayPal</button> --}}
-                            <button type="button" onclick="payWithPayPal()" class="btn btn-block btn-lg btn-danger"
-                                id="paypal-button">Continuer</button>
+                                <button type="button" onclick="payWithPayPal()" class="btn btn-block btn-lg btn-danger"
+                                    id="paypal-button">Continuer</button>
+                            </div>
                         </div>
                     </div>
+
                 </div>
-
             </div>
-        </div>
 
-    </div>
-    {{-- <div class="modal-footer">
+        </div>
+        {{-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Fermer</button>
                     <button type="submit" id="card-button" class="btn btn-primary btn-lg">Continue</button>
                 </div> --}}
-    {{-- END TAB 01 --}}
+        {{-- END TAB 01 --}}
 
-</div>
+    </div>
 </div>
 </div>
 

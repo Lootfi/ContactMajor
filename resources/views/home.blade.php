@@ -4,8 +4,6 @@
 
 @section('content')
 <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&currency=EUR">
-    // Required. Replace SB_CLIENT_ID with your sandbox client ID.
-
 </script>
 <x-signup />
 <x-login />

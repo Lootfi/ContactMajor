@@ -28,7 +28,11 @@ class FacebookAuth extends Controller
             'password' => '',
             'avatar' => $socialUser->getAvatar(),
         ]);
-        // Auth::login($user);
+
+        if ($user->payment_confirmed == true) {
+            Auth::login($user);
+            return redirect()->route('welcome');
+        }
 
         return redirect('/')->with('email', $user->email);
     }

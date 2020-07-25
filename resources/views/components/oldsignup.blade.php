@@ -17,7 +17,7 @@
                 </div>
             </div>
             @endif
-            <x-social-signup />
+            <x-social-signup :login="false" />
             <div class="text-muted text-center my-3">
                 <span>or</span>
             </div>

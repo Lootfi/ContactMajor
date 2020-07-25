@@ -6,14 +6,16 @@ use Illuminate\View\Component;
 
 class SocialSignup extends Component
 {
+
+    public $login;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($login)
     {
-        //
+        $this->login = $login;
     }
 
     /**
