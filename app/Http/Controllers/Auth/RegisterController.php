@@ -77,7 +77,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $validation = $this->validator($request->only(['name', 'email', 'password', 'password_confirmation']));
+        $validation = $this->validator($request->only(['name', 'email', 'password', 'password_confirmation']))->validate();
 
         // clearout email validation commented for now
         // $emailValidation = $this->validateEmail($request->email);
@@ -85,11 +85,13 @@ class RegisterController extends Controller
         //     return response()->json(['errors' => ['email' => ["L'email est invalid"]]]);
         // }
 
-        if ($validation->fails()) {
-            return response()->json(['errors' => $validation->errors()]);
-        }
+        // if ($validation->fails()) {
+        //     return response()->json(['errors' => $validation->errors()]);
+        // }
 
         event(new Registered($user = $this->create($request->only(['name', 'email', 'password']))));
+
+        return redirect()->route('home')->with(['email' => $user->email, 'intent' => $user->createSetupIntent()->client_secret]);
 
         // DB::beginTransaction();
 
@@ -156,5 +158,10 @@ class RegisterController extends Controller
             return response(['status' => $response['data']['status']]);
         }
         return;
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('home');
     }
 }

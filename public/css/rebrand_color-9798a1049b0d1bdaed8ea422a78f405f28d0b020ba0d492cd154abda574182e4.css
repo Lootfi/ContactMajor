@@ -5668,7 +5668,6 @@ svg {
     min-height: 50vh;
 }
 .mc-page__content {
-    min-height: 100vh;
 }
 .mc-page__footer {
     min-height: 200px;

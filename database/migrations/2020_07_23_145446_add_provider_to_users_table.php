@@ -14,9 +14,9 @@ class AddProviderToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('provider');
-            $table->string('provider_id');
-            $table->text('avatar');
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->unique()->nullable();
+            $table->text('avatar')->nullable();
         });
     }
 

@@ -258,12 +258,35 @@
 
 @endsection
 
+@push('scripts')
+<script>
+    document.getElementById('step-2').style.display = "none";
+</script>
+@endpush
+
 @if(session('email'))
 @push('scripts')
 <script>
+    var e = <?php echo json_encode(['email' => session('email')]); ?>;
+    var email = e.email;
     document.getElementById('hero-cta').click();
     document.getElementById('step-1').style.display = "none";
     document.getElementById('step-2').style.display = "block";
+
+    
+
+</script>
+@endpush
+@endif
+
+@push('scripts')
+<script src="{{asset('js/payment.js')}}"></script>
+@endpush
+
+@if($errors->has('email') || $errors->has('password'))
+@push('scripts')
+<script>
+    document.getElementById("hero-cta").click();
 </script>
 @endpush
 @endif

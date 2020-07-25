@@ -89,11 +89,3 @@
 </div>
 
 </div>
-
-@push('scripts')
-@if($errors->has('email') || $errors->has('password'))
-<script>
-    document.getElementById("loginButton").click()
-</script>
-@endif
-@endpush

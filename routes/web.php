@@ -23,17 +23,13 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-// Route::post('login', 'Auth\LoginController@login')->name('login');
-// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-// Route::post('register', 'Auth\RegisterController@register')->name('register');
-
 Route::get('/home', 'HomeAuthController@index')->name('welcome');
-
-// Route::post('/social/facebook/signup', 'Auth\FacebookController@register')->name('facebook-signup');
-// Route::post('/social/google/signup', 'Auth\GoogleController@register')->name('google-signup');
 
 Route::get('facebook', 'Auth\FacebookAuth@auth')->name('facebook-signup');
 Route::get('facebookcallback', 'Auth\FacebookAuth@callback');
 
 Route::get('google', 'Auth\GoogleAuth@auth')->name('google-signup');
 Route::get('googlecallback', 'Auth\GoogleAuth@callback');
+
+Route::post('confirm-paypal-payment', 'Payment\PaymentController@confirmPayPal');
+Route::post('confirm-stripe-payment', 'Payment\PaymentController@confirmStripe');
