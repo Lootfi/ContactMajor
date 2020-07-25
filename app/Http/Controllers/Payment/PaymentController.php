@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,13 @@ use Laravel\Cashier\Exceptions\IncompletePayment;
 
 class PaymentController extends Controller
 {
+    public $mailer;
+
+
+    function __construct()
+    {
+        $this->mailer = new MailController();
+    }
 
     public function confirmPayPal(Request $request)
     {
@@ -21,6 +29,13 @@ class PaymentController extends Controller
         $user->save();
 
         Auth::login($user);
+
+        $this->mailer->send_email_verification(
+            'Email verification',
+            '<html><body><h2>Verify Your Email!</h2></body></html>',
+            'Verify Your Email!',
+            $user
+        );
 
         return redirect()->route('welcome');
     }
@@ -38,6 +53,12 @@ class PaymentController extends Controller
             $user->save();
             Auth::login($user);
 
+            $this->mailer->send_email_verification(
+                'Email verification',
+                '<html><body><h2>Verify Your Email!</h2></body></html>',
+                'Verify Your Email!',
+                $user
+            );
             DB::commit();
             return redirect()->route('welcome');
         } catch (IncompletePayment $exception) {

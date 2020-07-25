@@ -2,18 +2,19 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="loginModal">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <x-social-signup :login="true" />
                 <div class="text-muted text-center my-3">
                     <span>or</span>
                 </div>
                 <form id="loginForm" method="POST" action="{{ route('login') }}">
                     @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title">Login</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+
                     <div class="modal-body">
 
                         <div class="form-group">
