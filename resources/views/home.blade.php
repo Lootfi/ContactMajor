@@ -9,7 +9,7 @@
 <x-login />
 <div data-react-class="HomepageGuest">
     <div class="HomepageGuest__heroContainer--jwuIW">
-        <div class="d-flex row" style="padding-top: 70px;">
+        <div class="d-flex row" style="padding-top: 67px;">
             <div class="col-12 col-md-6 col-xl-6 col-sm-12 landing-main">
                 <h1 class="landing-header mc-mx-5">
                     Today's the day

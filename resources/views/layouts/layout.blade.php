@@ -66,8 +66,15 @@
     <div class="hide-when-cart-active">
 
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-            <a href="/" class="navbar-brand logo"><img src="{{ asset('logo.png') }}" id="cm-logo" alt="cm-logo" />
+            @auth
+            <a href="/home" class="navbar-brand logo"><img src="{{ asset('logo.png') }}" id="cm-logo" alt="cm-logo" />
             </a>
+            @endauth
+            @guest
+            <a href="{{route('home')}}" class="navbar-brand logo"><img src="{{ asset('logo.png') }}" id="cm-logo"
+                    alt="cm-logo" />
+            </a>
+            @endguest
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

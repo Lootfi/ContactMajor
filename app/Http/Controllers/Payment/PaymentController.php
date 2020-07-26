@@ -26,16 +26,23 @@ class PaymentController extends Controller
 
         $user->payment_confirmed = true;
         $user->payment_method = "paypal_" . $request->payment_method;
+
+        if ($user->provider == null) {
+            $this->mailer->send_email_verification(
+                'Email verification',
+                null,
+                'Verify Your Email!',
+                $user
+            );
+        } else {
+            $user->email_verified_at = now();
+        }
+
         $user->save();
 
         Auth::login($user);
 
-        $this->mailer->send_email_verification(
-            'Email verification',
-            '<html><body><h2>Verify Your Email!</h2></body></html>',
-            'Verify Your Email!',
-            $user
-        );
+
 
         return redirect()->route('welcome');
     }
@@ -50,12 +57,24 @@ class PaymentController extends Controller
 
             $user->payment_method = "stripe_" . $request->payment_method;
             $user->payment_confirmed = true;
+
+            if ($user->provider == null) {
+                $this->mailer->send_email_verification(
+                    'Email verification',
+                    null,
+                    'Verify Your Email!',
+                    $user
+                );
+            } else {
+                $user->email_verified_at = now();
+            }
+
             $user->save();
             Auth::login($user);
 
             $this->mailer->send_email_verification(
                 'Email verification',
-                '<html><body><h2>Verify Your Email!</h2></body></html>',
+                null,
                 'Verify Your Email!',
                 $user
             );

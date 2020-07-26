@@ -21,9 +21,9 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/', 'HomeController@index')->name('home');
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeAuthController@index')->name('welcome');
+Route::get('/home', 'HomeAuthController@index')->name('welcome')->middleware(['payed', 'verified']);
 
 Route::get('facebook', 'Auth\FacebookAuth@auth')->name('facebook-signup');
 Route::get('facebookcallback', 'Auth\FacebookAuth@callback');
