@@ -12,7 +12,8 @@ class FacebookAuth extends Controller
 {
     public function auth()
     {
-        return Socialite::driver('facebook')->redirect();
+        //->redirect()->getTargetUrl()
+        return Socialite::driver('facebook')->asPopup()->redirect();
     }
 
     public function callback()
